@@ -19,15 +19,17 @@ class Character extends Phaser.GameObjects.Sprite {
          this.setWin();
       }
       else {
-         this.setLoss();
+         this.setWrong();
       }
    }
    
    setWin() {
       // the player selected the right character
+      GameScene.playerWin();
    }
    
-   setLoss() {
+   setWrong() {
       // the player selects an incorrect character
+      GameScene.timer -= 5;
    }
 }
