@@ -28,7 +28,7 @@ class GameScene extends Phaser.Scene {
         // Will be checked against all the other characters to make sure it's not used twice
         const correctTexture = getRandomTexture();
 
-        const numCharacters = 10;
+        const numCharacters = 30;
 
         // Creates characters and places them on screen, the wanted person will be placed last
         for (let i = 0; i < numCharacters; i++) {
@@ -54,7 +54,7 @@ class GameScene extends Phaser.Scene {
         this.objects.push(character);
         
         // Place timer on screen
-        this.timerText = this.add.text((this.sys.game.config.width - 100), (this.sys.game.config.height - 50), '', {
+        this.timerText = this.add.text((this.sys.game.config.width - 100), (this.sys.game.config.height - 50), 'Time: ' + initialTime, {
             fontSize: '32px',
             fill: '#ffffff'
         });
@@ -75,8 +75,13 @@ class GameScene extends Phaser.Scene {
         if (timer > 0) {
             timer--;
         }
+<<<<<<< Updated upstream
 
         if (timer <= 0) {
+=======
+        this.timerText.text('Time: ' + this.timer);
+        if (this.timer <= 0) {
+>>>>>>> Stashed changes
             // Call the method when the timer reaches zero
             this.playerLose();
         }
@@ -91,6 +96,8 @@ class GameScene extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+
+        this.timerText.text('Time: ' + this.timer);
     }
     
     playerWin() {
