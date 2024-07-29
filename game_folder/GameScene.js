@@ -77,6 +77,7 @@ class GameScene extends Phaser.Scene {
             this.timer--;
         }
 
+        this.timerText.text('Time: ' + this.timer);
         if (this.timer <= 0) {
             // Call the method when the timer reaches zero
             GameScene.playerLose();
