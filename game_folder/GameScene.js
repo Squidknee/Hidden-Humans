@@ -55,7 +55,7 @@ class GameScene extends Phaser.Scene {
         this.error = this.sound.add("error");
         
         // Place timer on screen
-        this.timerText = this.add.text((this.sys.game.config.width - 100), (this.sys.game.config.height - 50), '', {
+        this.timerText = this.add.text((this.sys.game.config.width - 100), (this.sys.game.config.height - 50), 'Time: ' + initialTime, {
             fontSize: '32px',
             fill: '#ffffff'
         });
