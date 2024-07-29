@@ -8,7 +8,7 @@ class GameScene extends Phaser.Scene {
     }
     
     create() {
-        const textures = ['char1', 'char2', 'char3']; // List of texture keys
+        const textures = ['char1', 'char2', 'char3', 'char4', 'char5', 'char6', 'char7', 'char8']; // List of texture keys
         const initialTime = 30;
         
         // Function to get a random texture from the list
@@ -52,6 +52,7 @@ class GameScene extends Phaser.Scene {
         const character = new Character(this, position.x, position.y, correctTexture, 1);
         this.add.existing(character);
         this.objects.push(character);
+        this.error = this.sound.add("error");
         
         // Place timer on screen
         this.timerText = this.add.text((this.sys.game.config.width - 100), (this.sys.game.config.height - 50), '', {
@@ -98,6 +99,7 @@ class GameScene extends Phaser.Scene {
     }
     
     static playerLose() {
+        this.error.play();
         this.timerEvent.remove(false);
     }
 }

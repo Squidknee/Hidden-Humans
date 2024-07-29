@@ -13,13 +13,13 @@ class Scene1 extends Phaser.Scene {
         this.load.spritesheet("char6", "./assets/characters/char6.png", {frameHeight: 32, frameWidth: 32});
         this.load.spritesheet("char7", "./assets/characters/char7.png", {frameHeight: 32, frameWidth: 32});
         this.load.spritesheet("char8", "./assets/characters/char8.png", {frameHeight: 32, frameWidth: 32});
+        this.load.audio("error", ["./assets/sounds/error.ogg", "assets/sounds/error.mp3"]);
+
     }
   
     create() 
     {
         this.add.text(20, 20, "Loading game...");
         this.scene.start("playGame");
-        this.add.image(40,40, "char1")
-        
     }
 }
