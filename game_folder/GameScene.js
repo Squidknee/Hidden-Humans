@@ -1,7 +1,7 @@
 class GameScene extends Phaser.Scene {
     timer = 30;
     timerText = "";
-    timerEvent;
+    static timerEvent;
     constructor() {
         super("playGame");
         this.objects = [];
@@ -65,20 +65,20 @@ class GameScene extends Phaser.Scene {
         // Call the updateTimer method every second
         this.timerEvent = this.time.addEvent({
             delay: 1000,
-            callback: updateTimer,
+            callback: this.updateTimer,
             callbackScope: this,
             loop: true
         });
     }
 
     updateTimer() {
-        if (timer > 0) {
-            timer--;
+        if (this.timer > 0) {
+            this.timer--;
         }
 
-        if (timer <= 0) {
+        if (this.timer <= 0) {
             // Call the method when the timer reaches zero
-            this.playerLose();
+            GameScene.playerLose();
         }
     }
     
@@ -87,17 +87,17 @@ class GameScene extends Phaser.Scene {
         this.timer = 30;
         this.timerEvent.reset({
             delay: 1000,
-            callback: updateTimer,
+            callback: this.updateTimer,
             callbackScope: this,
             loop: true
         });
     }
     
-    playerWin() {
+    static playerWin() {
         this.timerEvent.remove(false);
     }
     
-    playerLose() {
+    static playerLose() {
         this.timerEvent.remove(false);
     }
 }
