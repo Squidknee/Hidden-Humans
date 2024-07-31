@@ -1,7 +1,9 @@
 class GameScene extends Phaser.Scene {
-    timer = 30;
-    timerText = "";
-    static timerEvent;
+    //timer = 30;
+    //timerText = "";
+    //static timerEvent;
+    countdown
+    
     constructor() {
         super("playGame");
         this.objects = [];
@@ -9,7 +11,7 @@ class GameScene extends Phaser.Scene {
     
     create() {
         const textures = ['char1', 'char2', 'char3', 'char4', 'char5', 'char6', 'char7', 'char8']; // List of texture keys
-        const initialTime = 30;
+        const initialTime = 50;
         
         // Function to get a random texture from the list
         const getRandomTexture = () => {
@@ -19,8 +21,8 @@ class GameScene extends Phaser.Scene {
 
         // Function to get a random position within the game area
         const getRandomPosition = () => {
-            const x = Phaser.Math.Between(0, this.sys.game.config.width);
-            const y = Phaser.Math.Between(0, this.sys.game.config.height);
+            const x = Phaser.Math.Between(50, this.sys.game.config.width - 50);
+            const y = Phaser.Math.Between(50, this.sys.game.config.height - 50);
             return { x, y };
         };
         
@@ -28,7 +30,7 @@ class GameScene extends Phaser.Scene {
         // Will be checked against all the other characters to make sure it's not used twice
         const correctTexture = getRandomTexture();
 
-        const numCharacters = 10;
+        const numCharacters = 50;
 
         // Creates characters and places them on screen, the wanted person will be placed last
         for (let i = 0; i < numCharacters; i++) {
@@ -55,7 +57,7 @@ class GameScene extends Phaser.Scene {
         this.error = this.sound.add("error");
         
         // Place timer on screen
-        this.timerText = this.add.text((this.sys.game.config.width - 100), (this.sys.game.config.height - 50), 'Time: ' + initialTime, {
+        /**this.timerText = this.add.text((this.sys.game.config.width - 100), (this.sys.game.config.height - 50), 'Time: ' + initialTime, {
             fontSize: '32px',
             fill: '#ffffff'
         });
@@ -70,37 +72,29 @@ class GameScene extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+           **/
+        
+        const timerLabel = this.add.text(this.sys.game.config.width * .5, 50, '30', {fontSize: 48}).setOrigin(.5)
+        this.countdown = new CountdownController(this, timerLabel)
+        this.countdown.start(this.handleCountdownFinished.bind(this))
     }
 
-    updateTimer() {
-        if (this.timer > 0) {
-            this.timer--;
-        }
-
-        this.timerText.text('Time: ' + this.timer);
-        if (this.timer <= 0) {
-            // Call the method when the timer reaches zero
-            GameScene.playerLose();
-        }
-    }
-    
-    // Method to restart the timer
-    restartTimer() {
-        this.timer = 30;
-        this.timerEvent.reset({
-            delay: 1000,
-            callback: this.updateTimer,
-            callbackScope: this,
-            loop: true
-        });
+    handleCountdownFinished() {
+        GameScene.playerLose(this)
     }
     
     static playerWin() {
-        this.timerEvent.remove(false);
+        this.countdown.stop();
     }
     
-    static playerLose() {
-        this.error.play();
-        this.timerEvent.remove(false);
+    static playerLose(scene) {
+        scene.countdown.stop();
+        scene.add.text(scene.sys.game.config.width * .5, scene.sys.game.config.height * .5, 'You Lose!', {fontSize: 48}).setOrigin(.5)
+    }
+    
+    update() {
+        if(this.countdown){
+            this.countdown.update()
+        }
     }
 }
