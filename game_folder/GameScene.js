@@ -8,7 +8,12 @@ class GameScene extends Phaser.Scene {
     }
     
     create() {
-        const textures = ['char1', 'char2', 'char3', 'char4', 'char5', 'char6', 'char7', 'char8']; // List of texture keys
+        this.Weather = new weather()
+        this.Weather.loadBackground();
+        this.background = this.add.tileSprite(0, 0, config.width, config.height, this.Weather.getBackground());
+        this.background.setOrigin(0, 0);
+        
+        const textures = ['char1', 'char2', 'char3', 'char4', 'char5', 'char6', 'char7', 'char8', 'char9']; // List of texture keys
         const initialTime = 30;
         
         // Function to get a random texture from the list
