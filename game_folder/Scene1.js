@@ -32,9 +32,8 @@ class Scene1 extends Phaser.Scene {
                 start: 0, 
                 end: 1
             }),
-            frameRate: 1, 
+            frameRate: 10, 
             repeat: 0,
-            hideOnComplete: true
         });
 
         this.add.image(0, 0, 'start').setOrigin(0, 0);
@@ -45,8 +44,8 @@ class Scene1 extends Phaser.Scene {
         this.playButton.on('pointerdown', this.play, this);
         
     }
-    play(pointer, gameObject) {
-       // gameObject.play('play_anim'); 
+    play() {
+        this.playButton.play('play_anim'); 
         this.scene.start("playGame");
     }
 }
