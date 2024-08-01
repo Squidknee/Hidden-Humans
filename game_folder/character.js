@@ -1,6 +1,7 @@
 class Character extends Phaser.GameObjects.Sprite {
    constructor(scene, x, y, texture, target) {
       super(scene, x, y, texture);
+      this.scene = scene;
       this.target = target;
       this.setInteractive();
       this.on('pointerdown', this.onClick, this);
@@ -25,11 +26,11 @@ class Character extends Phaser.GameObjects.Sprite {
    
    setWin() {
       // the player selected the right character
-      GameScene.playerWin();
+      this.scene.playerWin();
    }
    
    setWrong() {
       // the player selects an incorrect character
-      GameScene.timer -= 5;
+      this.scene.countdown.wrong();
    }
 }
