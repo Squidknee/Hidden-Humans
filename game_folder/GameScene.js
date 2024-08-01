@@ -80,16 +80,17 @@ class GameScene extends Phaser.Scene {
     }
 
     handleCountdownFinished() {
-        GameScene.playerLose(this)
+        this.playerLose()
     }
     
-    static playerWin() {
+    playerWin() {
         this.countdown.stop();
+        this.add.text(this.sys.game.config.width * .5, this.sys.game.config.height * .5, 'You Win!', {fontSize: 48}).setOrigin(.5)
     }
     
-    static playerLose(scene) {
-        scene.countdown.stop();
-        scene.add.text(scene.sys.game.config.width * .5, scene.sys.game.config.height * .5, 'You Lose!', {fontSize: 48}).setOrigin(.5)
+    playerLose() {
+        this.countdown.stop();
+        this.add.text(this.sys.game.config.width * .5, this.sys.game.config.height * .5, 'You Lose!', {fontSize: 48}).setOrigin(.5)
     }
     
     update() {

@@ -51,8 +51,11 @@ class CountdownController
          this.timerEvent.destroy()
          this.timerEvent = undefined
       }
-      
-      
+   }
+   
+   wrong() {
+      //this.duration = this.duration - 5000
+      //this.scene.time.
    }
    
    update()
