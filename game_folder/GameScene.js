@@ -30,8 +30,9 @@ class GameScene extends Phaser.Scene {
 
         // Function to get a random position within the game area
         const getRandomPosition = () => {
-            const x = Phaser.Math.Between(10, this.sys.game.config.width - 10);
-            const y = Phaser.Math.Between(100, this.sys.game.config.height - 10);
+            const x = Phaser.Math.Between(20, this.sys.game.config.width - 30);
+            const y = Phaser.Math.Between(100, this.sys.game.config.height - 50);
+
             return { x, y };
         };
 
@@ -110,8 +111,10 @@ class GameScene extends Phaser.Scene {
         const timerLabel = this.add.text(this.sys.game.config.width * .5, 50, '30', {fontSize: 48}).setOrigin(.5)
         this.countdown = new CountdownController(this, timerLabel)
         this.countdown.start(this.handleCountdownFinished.bind(this))
-    
-        
+
+
+        this.add.image(this.sys.game.config.width - 64, this.sys.game.config.height - 64, 'find').setOrigin(0, 0);
+        this.add.sprite(this.sys.game.config.width - 48, this.sys.game.config.height - 48, correctTexture).setOrigin(0, 0);
     }
     play(){
         this.scene.restart();

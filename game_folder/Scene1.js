@@ -21,6 +21,7 @@ class Scene1 extends Phaser.Scene {
         this.load.spritesheet("char7", "./assets/characters/char7.png", {frameHeight: 32, frameWidth: 32});
         this.load.spritesheet("char8", "./assets/characters/char8.png", {frameHeight: 32, frameWidth: 32});
         this.load.spritesheet("char9", "./assets/characters/char9.png", {frameHeight: 32, frameWidth: 32});
+        this.load.image("find", "./assets/images/FIND.png");
         this.load.audio("error", ["./assets/sounds/error.ogg", "assets/sounds/error.mp3"]);
 
     }
