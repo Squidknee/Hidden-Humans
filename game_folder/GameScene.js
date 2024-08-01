@@ -1,6 +1,7 @@
 class GameScene extends Phaser.Scene {
     timer = 30;
     timerText = "";
+    Weather
     static timerEvent;
     constructor() {
         super("playGame");
@@ -81,7 +82,7 @@ class GameScene extends Phaser.Scene {
         if (this.timer > 0) {
             this.timer--;
         }
-
+        
         this.timerText.text('Time: ' + this.timer);
         if (this.timer <= 0) {
             // Call the method when the timer reaches zero
