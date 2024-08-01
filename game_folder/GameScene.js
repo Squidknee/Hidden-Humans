@@ -1,14 +1,20 @@
 class GameScene extends Phaser.Scene {
     timer = 30;
     timerText = "";
-    timerEvent;
+    Weather
+    static timerEvent;
     constructor() {
         super("playGame");
         this.objects = [];
     }
     
     create() {
-        const textures = ['char1', 'char2', 'char3']; // List of texture keys
+        this.Weather = new weather()
+        this.Weather.loadBackground();
+        this.background = this.add.tileSprite(0, 0, config.width, config.height, this.Weather.getBackground());
+        this.background.setOrigin(0, 0);
+        
+        const textures = ['char1', 'char2', 'char3', 'char4', 'char5', 'char6', 'char7', 'char8', 'char9']; // List of texture keys
         const initialTime = 30;
         
         // Function to get a random texture from the list
@@ -52,6 +58,7 @@ class GameScene extends Phaser.Scene {
         const character = new Character(this, position.x, position.y, correctTexture, 1);
         this.add.existing(character);
         this.objects.push(character);
+        this.error = this.sound.add("error");
         
         // Place timer on screen
         this.timerText = this.add.text((this.sys.game.config.width - 100), (this.sys.game.config.height - 50), 'Time: ' + initialTime, {
@@ -65,34 +72,21 @@ class GameScene extends Phaser.Scene {
         // Call the updateTimer method every second
         this.timerEvent = this.time.addEvent({
             delay: 1000,
-            callback: updateTimer,
+            callback: this.updateTimer,
             callbackScope: this,
             loop: true
         });
     }
 
-    updateTimer() {
-        if (timer > 0) {
-            timer--;
-        }
-<<<<<<< Updated upstream
-
-        if (timer <= 0) {
-=======
-        this.timerText.text('Time: ' + this.timer);
-        if (this.timer <= 0) {
->>>>>>> Stashed changes
-            // Call the method when the timer reaches zero
-            this.playerLose();
-        }
-    }
+   
+    
     
     // Method to restart the timer
     restartTimer() {
         this.timer = 30;
         this.timerEvent.reset({
             delay: 1000,
-            callback: updateTimer,
+            callback: this.updateTimer,
             callbackScope: this,
             loop: true
         });
@@ -100,11 +94,12 @@ class GameScene extends Phaser.Scene {
         this.timerText.text('Time: ' + this.timer);
     }
     
-    playerWin() {
+    static playerWin() {
         this.timerEvent.remove(false);
     }
     
-    playerLose() {
+    static playerLose() {
+        this.error.play();
         this.timerEvent.remove(false);
     }
 }
