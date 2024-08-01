@@ -30,8 +30,8 @@ class GameScene extends Phaser.Scene {
 
         // Function to get a random position within the game area
         const getRandomPosition = () => {
-            const x = Phaser.Math.Between(20, this.sys.game.config.width - 20);
-            const y = Phaser.Math.Between(100, this.sys.game.config.height - 30);
+            const x = Phaser.Math.Between(10, this.sys.game.config.width - 10);
+            const y = Phaser.Math.Between(100, this.sys.game.config.height - 10);
             return { x, y };
         };
 
@@ -48,7 +48,7 @@ class GameScene extends Phaser.Scene {
         // Will be checked against all the other characters to make sure it's not used twice
         const correctTexture = getRandomTexture();
 
-        const numCharacters = 60;
+        const numCharacters = 50;
 
         // Creates characters and places them on screen, the wanted person will be placed last
         for (let i = 0; i < numCharacters; i++) {
@@ -110,22 +110,27 @@ class GameScene extends Phaser.Scene {
         const timerLabel = this.add.text(this.sys.game.config.width * .5, 50, '30', {fontSize: 48}).setOrigin(.5)
         this.countdown = new CountdownController(this, timerLabel)
         this.countdown.start(this.handleCountdownFinished.bind(this))
+    
+        
     }
+    play(){
+        this.scene.restart();
+    }
+    
 
     handleCountdownFinished() {
-        this.playerLose()
+        this.playerEnd("You Lose!")
 
     }
     
-    playerWin() {
+    playerEnd(text) {
         this.countdown.stop();
-        this.add.text(this.sys.game.config.width * .5, this.sys.game.config.height * .5, 'You Win!', {fontSize: 48}).setOrigin(.5)
+        this.add.text(this.sys.game.config.width * .5, this.sys.game.config.height * .5, text, {fontSize: 48}).setOrigin(.5)
+        this.replayButton = this.add.image(config.width/2+5, config.height/2+100, "replay");
+        this.replayButton.setInteractive();
+        this.replayButton.on('pointerdown', this.play, this);
     }
     
-    playerLose() {
-        this.countdown.stop();
-        this.add.text(this.sys.game.config.width * .5, this.sys.game.config.height * .5, 'You Lose!', {fontSize: 48}).setOrigin(.5)
-    }
     
     update() {
         if(this.countdown){

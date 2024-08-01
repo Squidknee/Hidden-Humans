@@ -26,7 +26,7 @@ class Character extends Phaser.GameObjects.Sprite {
    
    setWin() {
       // the player selected the right character
-      this.scene.playerWin();
+      this.scene.playerEnd("You Win!");
    }
    
    setWrong() {
