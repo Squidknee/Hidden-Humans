@@ -4,14 +4,20 @@ class GameScene extends Phaser.Scene {
     //timerText = "";
     //static timerEvent;
     countdown
+    backgroundString
     constructor() {
         super("playGame");
         this.objects = [];
     }
     
+    init(data)
+    {
+        this.backgroundString = data.background
+    }
+    
     create() {
-        console.log(this.data.get('weather') + '?')
-        this.background = this.add.tileSprite(0, 0, config.width, config.height, this.data.get('weather'));
+        console.log(this.backgroundString + '?')
+        this.background = this.add.tileSprite(0, 0, config.width, config.height, this.backgroundString);
         this.background.setOrigin(0, 0);
         
         const textures = ['char1', 'char2', 'char3', 'char4', 'char5', 'char6', 'char7', 'char8', 'char9']; // List of texture keys

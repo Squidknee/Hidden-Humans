@@ -50,10 +50,9 @@ class Scene1 extends Phaser.Scene {
         if (this.Weather.getLoaded())
         {
             console.log(this.Weather.getBackground() + "!");
-            this.data.set('background', this.Weather.getBackground())
             
             this.playButton.play('play_anim');
-            this.scene.start("playGame");
+            this.scene.start("playGame", {background: this.Weather.getBackground()});
         }
     }
 }

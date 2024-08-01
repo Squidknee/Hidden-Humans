@@ -63,7 +63,8 @@ class weather{
          this.gameBackground = "dirt"
       }
       else {
-         this.gameBackground = "default"
+         console.log('default');
+         this.gameBackground = "grass"
       }     
       console.log(this.gameBackground);
       return this.gameBackground
