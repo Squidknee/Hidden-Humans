@@ -30,8 +30,8 @@ class GameScene extends Phaser.Scene {
 
         // Function to get a random position within the game area
         const getRandomPosition = () => {
-            const x = Phaser.Math.Between(10, this.sys.game.config.width - 10);
-            const y = Phaser.Math.Between(100, this.sys.game.config.height - 10);
+            const x = Phaser.Math.Between(20, this.sys.game.config.width - 20);
+            const y = Phaser.Math.Between(100, this.sys.game.config.height - 30);
             return { x, y };
         };
 
@@ -48,7 +48,7 @@ class GameScene extends Phaser.Scene {
         // Will be checked against all the other characters to make sure it's not used twice
         const correctTexture = getRandomTexture();
 
-        const numCharacters = 50;
+        const numCharacters = 60;
 
         // Creates characters and places them on screen, the wanted person will be placed last
         for (let i = 0; i < numCharacters; i++) {

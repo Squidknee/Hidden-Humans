@@ -49,8 +49,6 @@ class weather{
             this.chooseBackground()
             console.log(weatherCode);
          })
-         
-         this.loaded = true;
       });
    
    }
@@ -58,14 +56,15 @@ class weather{
 
       if(this.arr1.includes(this.weatherCode) ) {
          this.gameBackground = "grass"
-   
+         
       } else if(this.arr2.includes(this.weatherCode)) {
          this.gameBackground = "dirt"
       }
       else {
          console.log('default');
          this.gameBackground = "grass"
-      }     
+      }
+      this.loaded = true;
       console.log(this.gameBackground);
       return this.gameBackground
    }
