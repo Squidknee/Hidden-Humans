@@ -115,9 +115,19 @@ class GameScene extends Phaser.Scene {
 
         this.add.image(this.sys.game.config.width - 64, this.sys.game.config.height - 64, 'find').setOrigin(0, 0);
         this.add.sprite(this.sys.game.config.width - 48, this.sys.game.config.height - 48, correctTexture).setOrigin(0, 0);
+        this.errorSound = this.sound.add("error");
     }
     play(){
         this.scene.restart();
+    }
+
+    missed(){
+        var musicConfig = {
+            mute: false,
+            volume: 0.5,
+            
+          }
+        this.errorSound.play(musicConfig);
     }
     
 

@@ -31,6 +31,7 @@ class Character extends Phaser.GameObjects.Sprite {
    
    setWrong() {
       // the player selects an incorrect character
+      this.scene.missed();
       this.scene.countdown.wrong();
    }
 }
