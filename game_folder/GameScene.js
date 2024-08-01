@@ -34,7 +34,7 @@ class GameScene extends Phaser.Scene {
         // Will be checked against all the other characters to make sure it's not used twice
         const correctTexture = getRandomTexture();
 
-        const numCharacters = 10;
+        const numCharacters = 30;
 
         // Creates characters and places them on screen, the wanted person will be placed last
         for (let i = 0; i < numCharacters; i++) {
@@ -78,17 +78,8 @@ class GameScene extends Phaser.Scene {
         });
     }
 
-    updateTimer() {
-        if (this.timer > 0) {
-            this.timer--;
-        }
-        
-        this.timerText.text('Time: ' + this.timer);
-        if (this.timer <= 0) {
-            // Call the method when the timer reaches zero
-            GameScene.playerLose();
-        }
-    }
+   
+    
     
     // Method to restart the timer
     restartTimer() {
@@ -99,6 +90,8 @@ class GameScene extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+
+        this.timerText.text('Time: ' + this.timer);
     }
     
     static playerWin() {
